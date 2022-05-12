@@ -14,9 +14,8 @@ public class InfoModule : ModuleBase<SocketCommandContext>
 
 	[Command("ping")]
 	[Summary("Replies with 'pong'.")]
-	public Task PongAsync() => ReplyAsync("pong");
-
-	// ReplyAsync is a method on ModuleBase 
+	public Task PongAsync()
+		=> ReplyAsync("pong");
 }
 
 // Create a module with the 'sample' prefix

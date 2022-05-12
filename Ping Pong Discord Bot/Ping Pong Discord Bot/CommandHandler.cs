@@ -1,30 +1,29 @@
 ﻿using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 public class Initialize
 {
     private readonly CommandService _commands;
     private readonly DiscordSocketClient _client;
+    private readonly LoggingService _logging;
 
     // Ask if there are existing CommandService and DiscordSocketClient
     // instance. If there are, we retrieve them and add them to the
     // DI container; if not, we create our own.
-    public Initialize(CommandService commands = null, DiscordSocketClient client = null)
+    public Initialize(CommandService commands = null, DiscordSocketClient client = null, LoggingService logging = null)
     {
         _commands = commands ?? new CommandService();
         _client = client ?? new DiscordSocketClient();
+        _logging = logging ?? new LoggingService(_client, _commands);
+        
     }
 
     public IServiceProvider BuildServiceProvider() => new ServiceCollection()
         .AddSingleton(_client)
         .AddSingleton(_commands)
+        .AddSingleton(_logging)
         // You can pass in an instance of the desired type
         // ...or by using the generic method.
         //
@@ -47,7 +46,7 @@ public class CommandHandler
     {
         _services = services;
         _commands = commands;
-        _client = client;        
+        _client = client;
     }
 
     public async Task InstallCommandsAsync()
