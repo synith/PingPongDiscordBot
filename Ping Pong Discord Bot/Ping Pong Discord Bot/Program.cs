@@ -14,6 +14,8 @@ public class Program
 
     public async Task MainAsync()
     {
+        ApiHelper.InitializeClient();
+
         var _config = new DiscordSocketConfig { MessageCacheSize = 100 };   
         
         _client = new DiscordSocketClient(_config);
