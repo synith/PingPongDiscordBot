@@ -18,7 +18,7 @@ public class GameSearchProcessor
             {
                 GameSearchResult result = await response.Content.ReadAsAsync<GameSearchResult>();
 
-                return result.Data.Stellaris.List[0];
+                return result.Data.First().Value.List[0];
             }
             else
             {
