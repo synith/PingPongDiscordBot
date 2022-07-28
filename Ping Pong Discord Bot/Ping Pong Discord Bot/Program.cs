@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using System.IO;
 
 public class Program
 {
@@ -29,7 +30,7 @@ public class Program
 
         _commandHandler = new CommandHandler(_services, _client, _commandService);
 
-        var token = File.ReadAllText(@"D:\PingPongBotResources\token.txt");
+        var token = File.ReadAllText(@"E:\PingPongBotResources\token.txt");
 
         await _client.LoginAsync(TokenType.Bot, token);
         await _client.StartAsync();

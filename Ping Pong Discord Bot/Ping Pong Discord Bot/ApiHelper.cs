@@ -9,6 +9,8 @@ using System.Net.Http.Headers;
 public class ApiHelper
 {
     public static HttpClient ApiClient { get; set; }
+
+
     public static void InitializeClient()
     {
         ApiClient = new HttpClient();
